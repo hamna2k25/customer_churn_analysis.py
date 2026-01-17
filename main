@@ -1,0 +1,33 @@
+# Customer Churn Analysis
+# Code created with AI assistance | Business problem by Hamna Jamil
+
+import pandas as pd
+
+customers_data = [
+    {"id": 1, "name": "John Smith", "gender": "Male", "age": 45, "tenure": 24, "monthly_charge": 89.99, "status": "Active", "churn_reason": "-"},
+    {"id": 2, "name": "Sarah Johnson", "gender": "Female", "age": 32, "tenure": 12, "monthly_charge": 75.50, "status": "Churned", "churn_reason": "Price too high"},
+    {"id": 3, "name": "Mike Davis", "gender": "Male", "age": 28, "tenure": 6, "monthly_charge": 95.00, "status": "Churned", "churn_reason": "Competitor offer"},
+    {"id": 4, "name": "Emily Brown", "gender": "Female", "age": 51, "tenure": 36, "monthly_charge": 82.25, "status": "Active", "churn_reason": "-"},
+    {"id": 5, "name": "David Wilson", "gender": "Male", "age": 39, "tenure": 18, "monthly_charge": 88.75, "status": "Churned", "churn_reason": "Poor service"},
+    {"id": 6, "name": "Lisa Anderson", "gender": "Female", "age": 44, "tenure": 8, "monthly_charge": 79.99, "status": "Churned", "churn_reason": "Price too high"},
+    {"id": 7, "name": "James Taylor", "gender": "Male", "age": 55, "tenure": 42, "monthly_charge": 91.50, "status": "Active", "churn_reason": "-"}
+]
+
+df = pd.DataFrame(customers_data)
+
+total = len(df)
+churned = len(df[df['status'] == 'Churned'])
+churn_rate = (churned / total) * 100
+avg_charge = df['monthly_charge'].mean()
+
+print("=== CUSTOMER CHURN ANALYSIS ===")
+print(f"Total Customers: {total}")
+print(f"Churned: {churned}")
+print(f"Churn Rate: {churn_rate:.1f}%")
+print(f"Avg Monthly Charge: ${avg_charge:.2f}")
+
+print("\n=== CHURN BY GENDER ===")
+print(df.groupby(['gender', 'status']).size())
+
+print("\n=== CHURN REASONS ===")
+print(df[df['status'] == 'Churned']['churn_reason'].value_counts())
